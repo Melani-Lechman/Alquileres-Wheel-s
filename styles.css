@@ -1,3 +1,4 @@
+/*Estilos del Body*/
 * {
     box-sizing: border-box;
   }
@@ -12,11 +13,43 @@
     width: 100%;
   }
   
+  /*Estilos del Header*/
   .main-header {
     padding: 0 20px;
     background-color: black;
   }
   
+
+  /*veaamosssssssssssssssssss*/
+  .autos-container .task {
+    background-color: #f9f9f9;
+    margin: 15px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .autos-container .task p {
+    margin: 5px 0;
+  }
+  
+  .autos-container button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .autos-container button:hover {
+    background-color: #0056b3;
+  }
+  
+
+
+
   .main-header__title {
     width: 100%;
     height: 250px;
@@ -24,7 +57,6 @@
     background: url('Imagenes/menu.png') no-repeat;
     background-position-x: 60px;
   }
-  
   
   .main-header__container {
     display: flex;
@@ -100,6 +132,7 @@
     border: 1px solid #f39c12;
   }
   
+  /*Estilos del Slider*/
   .container-slider{
     margin: 50px 0;
     position: relative;
@@ -176,25 +209,52 @@
   .slider__txt{
     margin: 5px 0;
   }
+  /*botones*/
+  /* Botones */
+.btn-shop {
+  display: block;
+  border: 1px solid #ff4e00;
+  border-radius: 5px;
+  background-color: #ff4e00;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 150px;
+  margin: 20px auto;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-shop:hover {
+  background-color: #ff4d00d7;
+  box-shadow: 0px 10px 10px -6px black;
+  border-radius: 5px;
+}
+
+/* Estilos del contenedor */
+.container-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 15px;
+}
+
+/* Imagen de producto */
+.product__img_adm {
+  width: 100px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+/* Producto */
+.product {
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
   
-  .btn-shop {
-    display: block;
-    border: 1px solid #ff4e00;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    width: 150px;
-    margin: 20px auto;
-  }
-  
-  .btn-shop:hover{
-    background-color: #FF4E00;
-    box-shadow: 0px 10px 10px -6px black;
-    border-radius: 5px;
-  }
-  
+  /*Estilos del body*/
   .container-products {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -330,61 +390,40 @@
   
   .tip i{
     font-size: 2em;
-    color: #f39c12;
+    color: black;
     padding: 20px 0;
   }
   
   .tip .btn-shop{
-    color: #333;
+    color: black;
   }
-  
-  
+
 .copy {
   text-align: center;
   grid-column: span 4;
 }
-
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+/*Estilols del Formulario*/
+.container-form{
+    width: 450px;
+    margin: auto;
+    background: rgb(253, 246, 246);
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    border-radius: 7px;
 }
 
-.login-form {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.formu_input{
+  background: #1515152f;
+    width: 100%;
+    display: block;
+    padding: 20px;
+    margin-bottom: 2px;
+    border: 1px solid #555;
+    color: white;
 }
 
-.login-form h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.login-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.login-btn {
-  width: 100%;
-  padding: 10px;
-  background-color: #f39c12;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.login-btn:hover {
-  background-color: #e67e22;
-}
-
+/*Estilos del Footer*/
   .main-footer{
   background: #151515;
   color: white;
@@ -414,8 +453,8 @@
     box-sizing: border-box;
     margin-top: 20px;
     border-radius: 7px;
-  
   }
+
   .footer__input{
     background: #151515;
     width: 100%;
@@ -441,6 +480,7 @@
     border-radius: 5px;
   }
   
+  /*Ajuste Responsive de Contenido*/
   @media screen and (min-width:768px){
     .slider{
       height: 400px;
@@ -518,6 +558,24 @@
       background: #333;
       color: #f39c12;
     }
+
+    .product__img_adm {
+      width: 150px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.496);
+      border-radius: 50%;
+    
+    }
+    .container__testimonials{
+      font-size: 1.3em; 
+    }
+    .container-editor{
+      display: flex;
+      justify-content: space-between;
+    }
+    .editor__item{
+      width: 48%;
+    }
+
     .container-products {
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 15px;
