@@ -1,37 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> 
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="style_registro.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Interactivo</title>
+    <link rel="stylesheet" href="style_registro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
-    <title>Login - Alquileres Wheel's</title>
-    <link rel="icon" href="imagenes/login.png">
 </head>
 <body>
-    <div class="container">
-        <div class="form-content">
-            <h1 id="title">Login</h1>
-            <form id="authForm">
-                <div class="input-group">
-                    <div class="input-field" id="nameInput">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" name="name" id="name" placeholder="Nombre" required>
-                    </div>
-                    <div class="input-field">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" name="password" id="password" placeholder="Contraseña" required>
-                    </div>
-                    <p>Olvidaste tu Contraseña <a href="#">click aquí</a></p>
+<div class="container">
+    <div class="form-content">
+        <h1 id="title">Registro</h1>
+        <form id="registerForm">
+            <div class="input-group">
+                <div class="input-field" id="emailInput">
+                    <input type="email" id="email" placeholder="Correo">
                 </div>
-            </form>
+                <div class="input-field">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="username" placeholder="Nombre">
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Contraseña">
+                </div>
+                <p>¿Olvidaste tu contraseña? <a href="#">click aquí</a></p>
+            </div>
             <div class="btn-field">
+                <button id="signUp" type="button">Registro</button>
                 <button id="signIn" type="button">Login</button>
             </div>
-        </div>
+        </form>
     </div>
+</div>
 
-    <script src="autenticación.js"></script>
+<script src="autenticación.js"></script>
 </body>
 </html>
