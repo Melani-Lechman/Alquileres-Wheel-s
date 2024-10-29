@@ -1,45 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Alquileres Wheel's</title>
     <link rel="icon" href="imagenes/admin.png">
+    <link rel="stylesheet" href="styles_alquileres.css">
 </head>
 <body>
-<main class="main">
-    <div class="container">
-      <center><h2 class="main-title">Opciones de Administración</h2></center>
-        <section class="container-products">
-          <div class="product">
-            <img src="imagenes/agregar.png" alt="Agregar" class="product__img_adm">
-            <div class="product__description">
-              <a href="agregar_admin.html" class="btn-shop">Agregar</a>
-            </div>
-          </div>
-          <div class="product">
-            <img src="imagenes/editar.png" alt="Editar" class="product__img_adm">
-            <div class="product__description">
-              <a href="modificar_admin.html" class="btn-shop">Modificar</a>
-            </div>
-          </div>
-          <div class="product">
-            <img src="imagenes/borrar.png" alt="Borrar" class="product__img_adm">
-            <div class="product__description">
-              <a href="eliminar_admin.html" class="btn-shop">Eliminar</a>
-            </div>
-          </div>
-          <div class="product">
-            <img src="imagenes/inicio.png" alt="Inicio" class="product__img_adm">
-            <div class="product__description">
-              <a href="clasico.html" class="btn-shop">INICIO</a>
-            </div>
-          </div>
-        </section>
-      </div>
-      <script src="script.js"></script>
+    <h1>Administración de Autos</h1>
+
+    <!-- Formulario para agregar o editar autos -->
+    <div class="form-container">
+        <h2>Agregar o Editar Auto</h2>
+        <form id="autoForm">
+            <label>Marca: <input type="text" id="marca"></label>
+            <label>Modelo: <input type="text" id="modelo"></label>
+            <label>Color: <input type="text" id="color"></label>
+            <label>Precio por día: <input type="number" id="precioPorDia"></label>
+
+            <!-- Selección de categoría -->
+            <label>Categoría:
+                <select id="categoria">
+                    <option value="clasicos">Clásicos</option>
+                    <option value="deportivos">Deportivos</option>
+                    <option value="altagama">Alta Gama</option>
+                    <option value="camionetas">Camionetas</option>
+                </select>
+            </label>
+
+            <!-- Selección de disponibilidad -->
+            <label>Disponibilidad:
+                <select id="disponibilidad">
+                    <option value="Disponible">Disponible</option>
+                    <option value="No disponible">No disponible</option>
+                </select>
+            </label>
+
+            <button type="button" id="agregarAuto">Agregar</button>
+            <button type="button" id="modificarAuto">Modificar</button>
+            <button type="button" id="eliminarAuto">Eliminar</button>
+        </form>
+    </div>
+
+    <!-- Tabla para mostrar los autos -->
+    <table>
+        <thead>
+            <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Color</th>
+                <th>Precio por día</th>
+                <th>Categoría</th>
+                <th>Disponibilidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="autosContainer"></tbody>
+    </table>
+    <script src="admin_.js"></script>
 </body>
 </html>
-

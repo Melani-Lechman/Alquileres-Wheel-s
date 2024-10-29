@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles_alquileres.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    <link rel="icon" href="imagenes/icon1.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wheel's Alquileres</title>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container container--flex">
+            <div class="main-header__container">
+                <h1 class="main-header__title"></h1>
+                <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+                <nav class="main-nav" id="main-nav">
+                    <ul class="menu">
+                        <li class="menu__item"><a href="cliente.html" class="menu__link">INICIO</a></li>
+                        <li class="menu__item"><a href="#" class="menu__link">NOSOTROS</a></li>
+                        <li class="menu__item"><a href="#" class="menu__link">INFO</a></li>
+                        <li class="menu__item"><a href="alquileres.html" class="menu__link">ALQUILAR</a></li>
+                        <li class="menu__item"><a href="formulario.html" class="menu__link">CONTACTO</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <h1>Autos Deportivos para Alquilar</h1>
+
+    <div class="container" id="autosContainer">
+        <!-- Aquí se cargarán los autos disponibles de la categoría Clásicos -->
+    </div>
+
+    <!-- Formulario emergente para seleccionar la fecha de alquiler -->
+    <div class="modal" id="modalAlquiler">
+        <div class="modal-content">
+            <h3>Alquilar Auto</h3>
+            <label for="fechaAlquiler">Fecha de inicio:</label>
+            <input type="date" id="fechaAlquiler" min="">
+            <label for="diasAlquiler">Cantidad de días:</label>
+            <input type="number" id="diasAlquiler" min="1" value="1">
+            <p id="errorMsg" class="error"></p>
+            <button id="confirmarAlquiler">Confirmar</button>
+            <button id="cancelarAlquiler">Cancelar</button>
+        </div>
+    </div>
+
+    <script>
+        const autos = JSON.parse(localStorage.getItem('autos')) || [];
+        let autoSeleccionado = null;
+
+        function cargarAutosDisponibles() {
+            const autosContainer = document.getElementById('autosContainer');
+            autosContainer.innerHTML = '';
+
+            // Filtrar solo los autos de la categoría que están disponibles
+            autos.filter(auto => auto.categoria === 'deportivos' && auto.disponibilidad === 'Disponible')
+                .forEach(auto => {
+                    const carCard = document.createElement('div');
+                    carCard.classList.add('car-card');
+
+                    carCard.innerHTML = `
+                        <img src="https://via.placeholder.com/150" alt="Auto" class="car-image">
+                        <div class="car-details">
+                            <h3>${auto.marca} ${auto.modelo}</h3>
+                            <p>Color: ${auto.color}</p>
+                            <p>Precio por día: $${auto.precioPorDia}</p>
+                        </div>
+                        <button class="button" onclick="mostrarFormularioAlquiler(${auto.id})">Alquilar</button>
+                    `;
+                    autosContainer.appendChild(carCard);
+                });
+        }
+
+        // Mostrar formulario de alquiler
+        function mostrarFormularioAlquiler(id) {
+            autoSeleccionado = autos.find(auto => auto.id === id);
+            document.getElementById('modalAlquiler').style.display = 'flex';
+
+            // Configuramos la fecha mínima (hoy) para evitar fechas anteriores
+            const hoy = new Date().toISOString().split('T')[0];
+            document.getElementById('fechaAlquiler').setAttribute('min', hoy);
+        }
+
+        // Ocultar formulario de alquiler y limpiar campos
+        document.getElementById('cancelarAlquiler').onclick = function () {
+            document.getElementById('modalAlquiler').style.display = 'none';
+            limpiarFormularioAlquiler();
+        };
+
+        // Confirmar alquiler
+        document.getElementById('confirmarAlquiler').onclick = function () {
+            const fechaAlquiler = document.getElementById('fechaAlquiler').value;
+            const diasAlquiler = document.getElementById('diasAlquiler').value;
+
+            if (!validarFecha(fechaAlquiler)) {
+                document.getElementById('errorMsg').innerText = 'Por favor, selecciona una fecha válida.';
+                limpiarFormularioAlquiler(); // Limpiar después de mostrar el error
+                return;
+            }
+
+            if (diasAlquiler < 1) {
+                document.getElementById('errorMsg').innerText = 'La cantidad de días debe ser al menos 1.';
+                limpiarFormularioAlquiler(); // Limpiar después de mostrar el error
+                return;
+            }
+
+            // Cálculo del precio total
+            const precioTotal = autoSeleccionado.precioPorDia * diasAlquiler;
+
+            // Simulación de envío de correo de alquiler
+            enviarCorreoAlquiler(autoSeleccionado, fechaAlquiler, diasAlquiler, precioTotal);
+
+            alert(`Alquiler confirmado! Total a pagar: $${precioTotal}`);
+            document.getElementById('modalAlquiler').style.display = 'none';
+            limpiarFormularioAlquiler(); // Limpiar después de confirmar el alquiler
+        };
+
+        // Validar que la fecha seleccionada no sea anterior a hoy
+        function validarFecha(fecha) {
+            const hoy = new Date().toISOString().split('T')[0];
+            return fecha >= hoy;
+        }
+
+        // Función para limpiar el formulario de alquiler
+        function limpiarFormularioAlquiler() {
+            document.getElementById('fechaAlquiler').value = '';
+            document.getElementById('diasAlquiler').value = 1;
+            document.getElementById('errorMsg').innerText = ''; // Limpiar mensaje de error
+        }
+
+        // Simulación del envío de correo
+        function enviarCorreoAlquiler(auto, fecha, dias, total) {
+            const mensaje = `
+                ¡Hola!
+
+                Gracias por alquilar con nosotros. Aquí tienes los detalles de tu alquiler:
+
+                Auto: ${auto.marca} ${auto.modelo}
+                Fecha de inicio: ${fecha}
+                Días de alquiler: ${dias}
+                Total a pagar: $${total}
+
+                ¡Esperamos que disfrutes del servicio!
+
+                Saludos cordiales,
+                El equipo de Alquiler de Autos.
+            `;
+            console.log(`Correo enviado con éxito: \n${mensaje}`);
+        }
+
+        cargarAutosDisponibles();
+    </script>
+    <footer class="main-footer">
+        <!-- Footer content... -->
+    </footer>
+</body>
+</html>
